@@ -1,3 +1,4 @@
+// Cart component
 import { useContext } from "react";
 
 import CartItem from "./CartItem";
