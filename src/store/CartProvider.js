@@ -39,6 +39,11 @@ const cartReducer = (state, action) => {
     };
   }
 
+  // Clear the cart when the order is submitted successfully
+  if(action.type==='CLEAR') {
+    return defaultCartState;
+  }
+
   if(action.type==='REMOVE') {
 
     const existingCartItemIndex = state.items.findIndex(
@@ -82,11 +87,16 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "REMOVE", id: id });
   };
 
+  const clearCartHandler = ()=>{
+    dispatchCartAction({type:'CLEAR'});
+  };
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler
   };
 
   return (
